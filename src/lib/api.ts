@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 const envBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim()
-const normalizedBaseUrl = envBaseUrl ? envBaseUrl.replace(/\/$/, '') : '/api'
+const normalizedBaseUrl = envBaseUrl
+  ? envBaseUrl.replace(/\/$/, '')
+  : import.meta.env.PROD
+    ? 'https://feedbackflowserver.onrender.com/api'
+    : '/api'
 
 const api = axios.create({
   baseURL: normalizedBaseUrl,
